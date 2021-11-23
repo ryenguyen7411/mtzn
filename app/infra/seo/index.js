@@ -3,16 +3,36 @@ import { MAX_SEO_DESCRIPTION_LENGTH } from 'utils/constants';
 import { plains } from 'utils/normalize';
 
 export const SEOTYPE = {
+  HOMEPAGE: Symbol('home'),
+  ABOUTPAGE: Symbol('about'),
 };
 
 const METADATA_BASE = {
+  type: 'website',
+  title: 'Metazoon',
 };
 
 function getMetadataHandler (symbol) {
   switch (symbol) {
+    case SEOTYPE.HOMEPAGE:
+      return getMetadataHomePage;
+    case SEOTYPE.ABOUTPAGE:
+      return getMetadataAboutPage;
     default:
       return null;
   }
+}
+
+function getMetadataHomePage () {
+  return {
+    title: 'Homepage - ' + METADATA_BASE.title,
+  };
+}
+
+function getMetadataAboutPage () {
+  return {
+    title: 'About - ' + METADATA_BASE.title,
+  };
 }
 
 export function getMetadataInfo (symbol, data) {

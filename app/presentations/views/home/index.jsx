@@ -1,13 +1,27 @@
-import React from 'react';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
 import Repo from 'repo';
 import Usecase from 'usecase';
 
-function HomePageContent () {
+function HomePageContent ({ usecase }) {
+  const quote = usecase.Example().getQuote();
+
+  useEffect(() => {
+    usecase.Example().fetchQuote();
+  }, []);
+
   return (
     <div className="container">
       <main>
-        <h1 className="title">Welcome to Next JS</h1>
+        {quote?.status === 'SUCCESS'
+          ? (
+            <h1 className="title">{quote.data.text}</h1>
+            )
+          : (
+            <h1 className="title">Welcome to Metazoon</h1>
+            )}
 
+        <Link href="/about">About us</Link>
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
             <h3>Documentation &rarr;</h3>
