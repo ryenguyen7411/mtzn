@@ -1,0 +1,1 @@
+export const MAX_SEO_DESCRIPTION_LENGTH = 160;
